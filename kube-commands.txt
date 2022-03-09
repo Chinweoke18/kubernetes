@@ -62,7 +62,7 @@ kubectl -n kube-system describe deployments.apps coredns | grep -A2 Args | grep 
 kubectl describe configmap coredns -n kube-system
 
 
-GIT:
+Git:
 git clone
 git init
 git add
