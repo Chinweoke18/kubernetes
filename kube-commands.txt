@@ -69,3 +69,5 @@ git add
 git commit
 git branch -M main
 git push origin main
+git branch snapshot
+git checkout snapshot
