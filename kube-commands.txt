@@ -71,3 +71,6 @@ git branch -M main
 git push origin main
 git branch snapshot
 git checkout snapshot
+git checkout main
+git merge snapshot
+git push origin main
