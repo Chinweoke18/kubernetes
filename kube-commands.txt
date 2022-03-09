@@ -1,0 +1,71 @@
+Kubernetes
+
+
+docker run —user=1001 ubuntu sleep 3600
+docker run —cap-add MAC_ADMIN ubuntu
+docker volume create data-volume
+docker run -v data-volume: /var/lib/mysql mysql
+docker run -v /data/mysql: /var/lib/mysql mysql
+
+docker run —mount type=bind, source=/data/mysql, target=/var/lib/mysql mysql
+
+
+kubectl exec ubuntu-sleeper -- whoami
+kubectl exec webapp -- cat /log/app.log
+kubectl exec -it webapp /bin/sh
+
+Networking
+ip addr add 192.168.1.20/24 dev eth0
+cat /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/ip_forward
+/etc/sysctl.conf
+net.ipv4.ip_forward = 1
+
+adding a dns server in linux
+/etc/resolv.conf
+nameserver.  192.168.1.100
+/etc/nsswitch.conf
+
+ps aux
+ip netsns
+ip link
+ip netns exec red ip link
+ip -n red link
+ip link add veth-red type veth peer name vet-blue
+ip link set veth-red netns red
+ip link set veth-blue netns blue
+ip -n red addr add 192.168.15.1 dev veth-red
+ip -n blue addr add 192.168.15.2 dev veth-blue
+ip -n red link set veth-red up
+ip -n blue link set veth-b1
+ip netns exec red arp
+ip netns exec blue arp
+ip link add v-net-0 type bridge
+ip link set dev v-net-0 up
+
+kubectl get nodes -o wide
+kubectl get nodes controlplane -o wide
+ip a | grep -B2 10.3.116.12
+arp node01
+netstat -nplt
+netstat -anp | grep etcd | grep 2380 | wc -l
+
+ps -aux | grep kubelet | grep --color network-plugin=
+ls /opt/cni/bin
+ls /etc/cni/net.d/
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')&env.IPALLOC_RANGE=10.50.0.0/16"
+ip addr show weave
+kubectl get pods -n kube-system -o wide
+kubectl logs weave-net-6gdgz weave -n kube-system | grep ipalloc-range
+cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep cluster-ip-range
+kubectl -n kube-system describe deployments.apps coredns | grep -A2 Args | grep Corefile
+kubectl describe configmap coredns -n kube-system
+
+
+GIT:
+git clone
+git init
+git add
+git commit
+git branch -M main
+git push origin main
